@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 788eed11b03c8e340a0e470b58d3e874
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - musicSource: {instanceID: 0}
+  - backgroundMusic: {fileID: 8300000, guid: 5833894e2899f1840ac04193ca462e39, type: 3}
+  - sfxSource: {instanceID: 0}
+  - buttonClickSound: {fileID: 8300000, guid: e25a74df780365a4b9f55b99d83cfb5d, type: 3}
+  - bubbleBounceSound: {fileID: 8300000, guid: b0f430c1fd46319499a10af2b0496b67, type: 3}
+  - bubblePopSound: {fileID: 8300000, guid: dd6057fd464f77942a0bf39c54651b32, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
