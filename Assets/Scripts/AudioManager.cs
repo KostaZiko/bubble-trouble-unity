@@ -5,15 +5,17 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
 
     [Header("Music")]
-    public AudioSource musicSource;
     public AudioClip backgroundMusic;
 
     [Header("SFX")]
-    public AudioSource sfxSource;
     public AudioClip buttonClickSound;
     public AudioClip bubbleBounceSound;
     public AudioClip bubblePopSound;
     public AudioClip walkSound;
+
+
+    private AudioSource musicSource;
+    private AudioSource sfxSource;
 
     private bool isMuted = false;
 
@@ -23,6 +25,7 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
+            SetupAudioSources(); 
         }
         else
         {
@@ -31,28 +34,42 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    void SetupAudioSources()
+    {
+
+        musicSource = gameObject.AddComponent<AudioSource>();
+        musicSource.loop = true;
+        musicSource.playOnAwake = false;
+
+
+        sfxSource = gameObject.AddComponent<AudioSource>();
+        sfxSource.playOnAwake = false;
+    }
+
     void Start()
     {
         if (backgroundMusic != null)
         {
             musicSource.clip = backgroundMusic;
-            musicSource.loop = true;
             musicSource.Play();
         }
     }
 
     public void PlayButtonClick()
     {
+        if (sfxSource == null || buttonClickSound == null) return;
         sfxSource.PlayOneShot(buttonClickSound);
     }
 
     public void PlayBubbleBounce()
     {
+        if (sfxSource == null || bubbleBounceSound == null) return;
         sfxSource.PlayOneShot(bubbleBounceSound);
     }
 
     public void PlayBubblePop()
     {
+        if (sfxSource == null || bubblePopSound == null) return;
         sfxSource.PlayOneShot(bubblePopSound);
     }
 
@@ -60,6 +77,7 @@ public class AudioManager : MonoBehaviour
     {
         isMuted = !isMuted;
         musicSource.mute = isMuted;
+        sfxSource.mute = isMuted;
     }
 
     public bool IsMuted()
@@ -69,18 +87,20 @@ public class AudioManager : MonoBehaviour
 
     public void PlayWalk()
     {
-        if (walkSound == null) return;
+        if (sfxSource == null || walkSound == null) return;
         if (sfxSource.isPlaying) return;
         sfxSource.PlayOneShot(walkSound);
     }
 
     public void SetMusicVolume(float volume)
     {
+        if (musicSource == null) return;
         musicSource.volume = volume;
     }
 
     public float GetMusicVolume()
     {
+        if (musicSource == null) return 0f;
         return musicSource.volume;
     }
 }
